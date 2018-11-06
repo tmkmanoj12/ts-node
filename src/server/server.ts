@@ -56,7 +56,12 @@ class Server {
         let router = express.Router()
         router.use(cors({ credentials: true, origin: true }))
         this.app.use(router)
-        console.log('this is change 35')
+        var logger = require('../config/logger/winston-logger')
+        logger.info('info')
+        logger.error("Manoj")
+        logger.warn('warn')
+        logger.http('http')
+        logger.debug('debug')
     }
 
 

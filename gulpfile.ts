@@ -6,7 +6,6 @@ import tsc = require('gulp-typescript');
 import plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 import nodemon = require('gulp-nodemon')
-const jshint = require('gulp-jshint')
 import gulpMocha = require('gulp-mocha')
 /**
 * Remove dist directory.

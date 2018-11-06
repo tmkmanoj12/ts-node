@@ -16,9 +16,6 @@ var Server = require("../server/server");
 var debug = require("debug")("express:server");
 var mongo = require('../config/database/db').Mongo
 var http = require("http");
-
-// console.log(Server)
-//create http server
 var httpPort = normalizePort(process.env.PORT || 3006);
 
 //bootstrap the app that means pull up your bootstraps and start
