@@ -1,0 +1,131 @@
+#!/usr/bin/env node
+
+"use strict";
+
+
+/* Why we are writing in this file instead of ts file 
+beacause So you can require('./app') from external files 
+and get the express app that is not listening on any port 
+(think unit tests and the like). and generally bin forlers consisis of your excetubales*/
+/* So we can spawn the server with same code in different ports and we can write mini application
+by writing in the same project stucture  */
+
+//module dependencies
+
+var Server = require("../server/server");
+var debug = require("debug")("express:server");
+var mongo = require('../config/database/db').Mongo
+var http = require("http");
+
+// console.log(Server)
+//create http server
+var httpPort = normalizePort(process.env.PORT || 3006);
+
+//bootstrap the app that means pull up your bootstraps and start
+
+var app = Server.bootstrap().app;
+
+//set the port
+
+app.set("port", httpPort);
+
+//create the server
+let httpServer = http.createServer(app);
+(async () => {
+    try {
+        await mongo.startMongo()
+        httpServer.listen(httpPort);
+
+    } catch (e) {
+        process.exit(0)
+    }
+})()
+
+//listen on provided ports
+
+
+
+//add error handler
+httpServer.on("error", onError);
+
+
+
+//start listening on port
+httpServer.on("listening", onListening);
+
+
+
+
+
+/**
+* Normalize a port into a number, string, or false.
+*/
+
+function normalizePort(val) {
+
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
+
+
+
+/**
+* Event listener for HTTP server "error" event.
+*/
+
+function onError(error) {
+
+    if (error.syscall !== "listen") {
+        throw error;
+    }
+
+
+
+    var bind = typeof httpPort === "string"
+        ? "Pipe " + httpPort
+        : "Port " + httpPort;
+
+
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case "EACCES":
+            console.error(bind + " requires elevated privileges");
+            process.exit(1);
+            break;
+
+        case "EADDRINUSE":
+            console.error(bind + " is already in use");
+            process.exit(1);
+            break;
+
+        default:
+            throw error;
+    }
+}
+
+/**
+* Event listener for HTTP server "listening" event.
+*/
+
+function onListening() {
+
+    var addr = httpServer.address();
+    var bind = typeof addr === "string"
+        ? "pipe " + addr
+        : "port " + addr.port;
+
+    debug("Listening on " + bind);
+}
+module.exports = app

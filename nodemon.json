@@ -1,0 +1,7 @@
+{ 
+    "watch": ["dest"],
+    "exec": "node dist/bin/www" ,
+    "ext": "js json ts html css",
+    "verbose" : true,
+    "delay" : "2500"
+}
