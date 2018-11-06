@@ -1,6 +1,8 @@
 const bodyParser = require("body-parser");
 require('body-parser-xml')(bodyParser)
 import express = require("express");
+import { CertificateController } from "./app/controllers/certificate";
+import { CertificationService } from "./app/services/certificate";
 const morgan = require("morgan");
 const errorHandler = require("errorhandler");
 const cors = require("cors")
@@ -44,7 +46,7 @@ class Server {
         this.config();
 
         //add api
-        this.setUpRouter();
+        this.setUpAppRouting();
     }
 
     /**
@@ -52,16 +54,9 @@ class Server {
     *
     * @class Server
     */
-    public setUpRouter() {
-        let router = express.Router()
-        router.use(cors({ credentials: true, origin: true }))
-        this.app.use(router)
-        var logger = require('../config/logger/winston-logger')
-        logger.info('info')
-        logger.error("Manoj")
-        logger.warn('warn')
-        logger.http('http')
-        logger.debug('debug')
+    public setUpAppRouting() {
+        this.app.use('/manoj', new CertificateController (new CertificationService()).router)
+        console.log(5)
     }
 
 
@@ -74,6 +69,7 @@ class Server {
 
     public config() {
 
+        this.app.use(cors({ credentials: true, origin: true }))
         // morgan middleware to log HTTP requests
         this.app.use(morgan("dev"));
         //use json form parser middlware

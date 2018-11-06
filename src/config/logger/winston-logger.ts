@@ -44,19 +44,10 @@ const logger = winston.createLogger({
         })
     ),
     transports: [
-        new winston.transports.Console(),
-        //uncomment if you want to log to a file
-        // new winston.transports.File({
-        //     level: 'error',
-        //     colorize: false,
-        //     timestamp: false,
-        //     json: false,
-        //     filename: __dirname+'/logger.log',
-        //     maxsize: 5242880,
-        //     maxFile: 10,
-        //     logstash: false,
-        //     tailable: true})
+        new winston.transports.Console()
     ]
 });
 
+logger.profile = winston.profile
+logger.startTimer = winston.startTimer
 export = logger

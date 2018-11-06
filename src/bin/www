@@ -12,7 +12,7 @@ by writing in the same project stucture  */
 
 //module dependencies
 
-var Server = require("../server/server");
+var Server = require("../server");
 var debug = require("debug")("express:server");
 var mongo = require('../config/database/db').Mongo
 var http = require("http");

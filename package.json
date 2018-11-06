@@ -29,6 +29,7 @@
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.12.0",
     "@types/run-sequence": "0.0.30",
+    "@types/rx": "^4.1.1",
     "@types/sinon": "^5.0.5",
     "chai": "^4.2.0",
     "del": "^3.0.0",
@@ -58,6 +59,7 @@
     "morgan": "^1.9.1",
     "q": "^1.5.1",
     "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.3.3",
     "winston": "^3.1.0"
   }
 }

@@ -76,8 +76,11 @@ gulp.task("Start:Server", (done) => {
     runSequence(["Build:Typescript", "Watch"], function () {
         let stream = nodemon({
             script: "dist/bin/www",
-            watch: ['dist/server/server.js'],
-            verbose: true
+            watch: ['dist/server.js'],
+            verbose: true,
+            env:{
+                DEBUG:`${process.env.DEBUG}`
+            }
 
         })
         stream

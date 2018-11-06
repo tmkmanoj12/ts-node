@@ -7,5 +7,5 @@ export interface customerModel extends ICustomer, Document { }
 
 export interface customerModelStatic extends Model<customerModel> { }
 
-const name = "lavada"
+const name = "hoasd"
 export const Customer = mongoose.model<customerModel, customerModelStatic>('customer', customerSchema)

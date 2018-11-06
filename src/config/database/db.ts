@@ -11,7 +11,7 @@ export class Mongo {
                     // poolSize : 1000 //uncomment in prod
                 }
     
-                mongoose.connect("mongodb://localhost:27017/ekaushalnsdc", mongooseOptions);
+                mongoose.connect("mongodb://localhost:27017/manoj", mongooseOptions);
                 mongoose.connection.on("error", error => {
                     reject(false)
     
